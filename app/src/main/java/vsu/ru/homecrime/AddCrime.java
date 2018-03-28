@@ -1,4 +1,4 @@
-package vsu.ru.homecrime.model;
+package vsu.ru.homecrime;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import vsu.ru.homecrime.R;
+import vsu.ru.homecrime.model.Crime;
 
 public class AddCrime extends Fragment {
     private TextView titleTextView;
@@ -37,12 +39,16 @@ public class AddCrime extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.crime_add, container, false);
 
+        titleTextView=v.findViewById(R.id.title_text_view);
+        descriptionTextView=v.findViewById(R.id.description_text_view);
 
        okButton=v.findViewById(R.id.ok_button);
        okButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               crimeList.add(new Crime())
+               crimeList.add(new Crime(titleTextView.getText().toString(), descriptionTextView.getText().toString(), new Date(1311434)));
+               Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
+               okButton.setEnabled(false);
            }
        });
         return v;

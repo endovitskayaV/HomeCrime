@@ -2,4 +2,7 @@
     <string name="app_name">HomeCrime</string>
     <string name="title">title</string>
     <string name="description">description</string>
+    <string name="ok">OK</string>
+    <string name="solved">solved</string>
+    <string name="added">added</string>
 </resources>
