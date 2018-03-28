@@ -21,7 +21,6 @@ public class MainActivity extends FragmentActivity {
             fragment=new AddCrime();
             fragmentManager.beginTransaction().add(R.id.frame_layout, fragment)
                     .commit();
-
         }
     }
 }

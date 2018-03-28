@@ -4,23 +4,29 @@ import java.util.Date;
 
 public class Crime {
     private int id;
+    private String title;
     private String description;
     private Date date;
     private boolean isSolved;
 
-    public Crime(String description, Date date){
-        id=generateId();
-        this.description=description;
-        this.date=date;
-        isSolved=false;
+    public Crime(String title, String description, Date date) {
+        id = generateId();
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        isSolved = false;
     }
 
-    private int generateId(){
+    private int generateId() {
         return 0;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getDescription() {
