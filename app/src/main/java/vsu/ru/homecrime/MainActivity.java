@@ -11,11 +11,10 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         FragmentManager fragmentManager=getSupportFragmentManager();
         Fragment fragment=fragmentManager.findFragmentById(R.id.frame_layout);
         if (fragment==null){
-            fragment=new AddCrime();
+            fragment=new AddCrimeFragment();
             fragmentManager.beginTransaction().add(R.id.frame_layout, fragment)
                     .commit();
         }
