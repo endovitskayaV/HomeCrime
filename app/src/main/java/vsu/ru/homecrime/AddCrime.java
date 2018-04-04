@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import vsu.ru.homecrime.R;
+
 import vsu.ru.homecrime.model.Crime;
 
 public class AddCrime extends Fragment {
@@ -29,7 +29,7 @@ public class AddCrime extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       crimeList=new ArrayList<>();
+        crimeList = new ArrayList<>();
     }
 
     @Nullable
@@ -39,18 +39,20 @@ public class AddCrime extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.crime_add, container, false);
 
-        titleTextView=v.findViewById(R.id.title_text_view);
-        descriptionTextView=v.findViewById(R.id.description_text_view);
+        titleTextView = v.findViewById(R.id.title_text_view);
+        descriptionTextView = v.findViewById(R.id.description_text_view);
 
-       okButton=v.findViewById(R.id.ok_button);
-       okButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               crimeList.add(new Crime(titleTextView.getText().toString(), descriptionTextView.getText().toString(), new Date(1311434)));
-               Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
-               okButton.setEnabled(false);
-           }
-       });
+        okButton = v.findViewById(R.id.ok_button);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Crime crime=new Crime(titleTextView.getText().toString(), descriptionTextView.getText().toString(), new Date());
+                crimeList.add(crime);
+                okButton.setText(crime.getDate().toString());
+                Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
+                okButton.setEnabled(false);
+            }
+        });
         return v;
     }
 }

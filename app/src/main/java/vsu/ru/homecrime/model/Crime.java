@@ -9,6 +9,8 @@ public class Crime {
     private Date date;
     private boolean isSolved;
 
+    private static int counter=0;
+
     public Crime(String title, String description, Date date) {
         id = generateId();
         this.title = title;
@@ -18,7 +20,7 @@ public class Crime {
     }
 
     private int generateId() {
-        return 0;
+        return counter++;
     }
 
     public int getId() {

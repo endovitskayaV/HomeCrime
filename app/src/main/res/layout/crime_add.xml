@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,47 +8,47 @@
     tools:context="vsu.ru.homecrime.AddCrime">
 
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/title"
         style="?android:listSeparatorTextViewStyle"
-        android:layout_marginBottom="10dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/title" />
 
 
     <EditText
         android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="10dp"
-        android:minWidth="200dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/title"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/description"
+        android:minHeight="10dp"
+        android:minWidth="200dp"/>
+    <TextView
         style="?android:listSeparatorTextViewStyle"
-        android:layout_marginBottom="10dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/description" />
 
     <EditText
         android:id="@+id/description_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="10dp"
-        android:minWidth="200dp"
+        android:layout_marginBottom="10dp"
         android:hint="@string/description"
-        android:layout_marginBottom="10dp"/>
+        android:minHeight="10dp"
+        android:minWidth="200dp" />
 
     <Button
+        android:id="@+id/ok_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ok_button"
-        android:text="@string/ok"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:text="@string/ok" />
 
     <CheckBox
+        android:id="@+id/is_solved_check_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/is_solved_check_box"
-        android:text="@string/solved"/>
+        android:text="@string/solved" />
 </LinearLayout>
