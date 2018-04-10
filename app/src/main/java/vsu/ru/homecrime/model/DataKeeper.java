@@ -22,6 +22,14 @@ public class DataKeeper {
             crimesList.add(new Crime("", "", new Date()));
             crimesList.add(new Crime("", "", new Date()));
             crimesList.add(new Crime("", "", new Date()));
+            crimesList.add(new Crime("dfvbdf", "", new Date()));
+            crimesList.add(new Crime("", "", new Date()));
+            crimesList.add(new Crime("", "", new Date()));
+            crimesList.add(new Crime("", "", new Date()));
+            crimesList.add(new Crime("1", "", new Date()));
+            crimesList.add(new Crime("3", "", new Date()));
+            crimesList.add(new Crime("2", "", new Date()));
+            crimesList.add(new Crime("1", "", new Date()));
             return new DataKeeper();
         }
     }

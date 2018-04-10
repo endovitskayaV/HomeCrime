@@ -13,7 +13,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,11 +40,13 @@ public class AddCrimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        recyclerView = descriptionTextView.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new MyAdapter(getContext()));
-        View v = inflater.inflate(R.layout.crime_add, container, false);
 
+        View v = inflater.inflate(R.layout.fragment_crime_add, container, false);
+        recyclerView = v.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        MyAdapter myAdapter = new MyAdapter();
+        myAdapter.setCrimes(crimeList);
+        recyclerView.setAdapter(myAdapter);
 
 //        isSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
@@ -73,22 +74,22 @@ public class AddCrimeFragment extends Fragment {
 //            }
 //        });
 
-        okButton = v.findViewById(R.id.ok_button);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isTextValid(titleTextView.getText()))
-                    Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
-                else {
-                    Crime crime = new Crime(titleTextView.getText().toString(), descriptionTextView.getText().toString(), new Date());
-                    crimeList.add(crime);
-                    okButton.setText(crime.getDate().toString());
-                    //   okButton.setText(SimpleDateFormat.("", crime.getDate()));
-                    Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
-                    okButton.setEnabled(false);
-                }
-            }
-        });
+//        okButton = v.findViewById(R.id.ok_button);
+//        okButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isTextValid(titleTextView.getText()))
+//                    Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
+//                else {
+//                    Crime crime = new Crime(titleTextView.getText().toString(), descriptionTextView.getText().toString(), new Date());
+//                    crimeList.add(crime);
+//                    okButton.setText(crime.getDate().toString());
+//                    //   okButton.setText(SimpleDateFormat.("", crime.getDate()));
+//                    Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
+//                    okButton.setEnabled(false);
+//                }
+//            }
+//        });
         return v;
     }
 
