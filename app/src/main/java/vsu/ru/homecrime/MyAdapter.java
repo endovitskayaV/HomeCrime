@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,12 +17,12 @@ import vsu.ru.homecrime.model.Crime;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHolder> {
     private List<Crime> crimes = new ArrayList<>();
+    private MainFragment.OnClick onClick;
 
-    public List<Crime> getCrimes() {
-        return crimes;
+    public MyAdapter(MainFragment.OnClick onClick){
+        this.onClick=onClick;
     }
-
-    public void setCrimes(List<Crime> crimes) {
+    void setCrimes(List<Crime> crimes) {
         this.crimes = crimes;
     }
 
@@ -45,32 +44,34 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
     }
 
 
-    public class CrimeElementViewHolder extends RecyclerView.ViewHolder {
+    class CrimeElementViewHolder extends RecyclerView.ViewHolder {
 
         private TextView titleTextView;
         private TextView dateTextView;
         private CheckBox isSolvedCheckBox;
 
-        public CrimeElementViewHolder(final View itemView) {
+        CrimeElementViewHolder(final View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Toast.makeText(itemView.getContext(), crimes.get(getAdapterPosition()).getTitle(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(itemView.getContext(), crimes.get(getAdapterPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                     //go to item info -> activity+ fragment
+                    onClick.onClick(crimes.get(getAdapterPosition()), v);
+
                 }
             });
             titleTextView = itemView.findViewById(R.id.title);
-            dateTextView = itemView.findViewById(R.id.date);
+            dateTextView = itemView.findViewById(R.id.date_text_view);
             isSolvedCheckBox = itemView.findViewById(R.id.is_solved_check_box);
         }
 
-        public void bindTo(Crime crime) {
+        void bindTo(Crime crime) {
             DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
             titleTextView.setText(crime.getTitle());
             dateTextView.setText(dateFormat.format(crime.getDate()));
             isSolvedCheckBox.setChecked(crime.isSolved());
+            isSolvedCheckBox.setEnabled(false);
         }
     }
 
