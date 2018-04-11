@@ -31,7 +31,7 @@ public class CrimeInfoFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime_info, container, false);
-        crime = (Crime)getArguments().get(CRIME_KEY);
+        crime = (Crime) getArguments().get(CRIME_KEY);
 
 
         TextView titleTextView = v.findViewById(R.id.title_text_view);
@@ -59,4 +59,14 @@ public class CrimeInfoFragment extends Fragment {
             isSolvedTextView.setTextColor(ContextCompat.getColor(this.getContext(), R.color.red));
         }
     }
+
+    public static CrimeInfoFragment newInstance(Crime crime) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(CRIME_KEY, crime);
+        CrimeInfoFragment fragment = new CrimeInfoFragment();
+        fragment.setArguments(bundle); // после создания, перед add!!!!!
+        return fragment;
+    }
+
+
 }

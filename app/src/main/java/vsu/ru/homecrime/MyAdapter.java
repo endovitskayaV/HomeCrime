@@ -55,8 +55,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // Toast.makeText(itemView.getContext(), crimes.get(getAdapterPosition()).getTitle(), Toast.LENGTH_SHORT).show();
-                    //go to item info -> activity+ fragment
+                    //обработка нажатия на отдельные элементы списка
+                    // go to item info -> activity+ fragment
                     onClick.onClick(crimes.get(getAdapterPosition()), v);
 
                 }

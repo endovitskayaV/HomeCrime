@@ -17,6 +17,8 @@ import vsu.ru.homecrime.model.DataKeeper;
 
 public class MainFragment extends Fragment {
     private List<Crime> crimeList;
+    private MyAdapter myAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,20 +33,45 @@ public class MainFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_main, container, false);
-        RecyclerView recyclerView = v.findViewById(R.id.crime_list_recycler_view);
+        recyclerView = v.findViewById(R.id.crime_list_recycler_view);
         // как будут располагаться элементы списка
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MyAdapter myAdapter = new MyAdapter(new MainFragment.OnClick() {
+//        myAdapter = new MyAdapter(new MainFragment.OnClick() {
+//            @Override
+//            public void onClick(Crime crime, View view) {
+//                Intent intent = CrimeInfoActivity.newIntent(getContext(), crime);
+//                startActivity(intent);
+//                //start crime info activity
+//            }
+//        });
+//        myAdapter.setCrimes(crimeList);
+//        recyclerView.setAdapter(myAdapter);
+        createAdapter();
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (myAdapter == null) {
+            createAdapter();
+        } else {
+            myAdapter.notifyDataSetChanged();
+           // TODO: use notifyItemChanger(int position)- элемент который просматривали только обновить
+        }
+
+    }
+
+    private void createAdapter() {
+        myAdapter = new MyAdapter(new MainFragment.OnClick() {
             @Override
             public void onClick(Crime crime, View view) {
                 Intent intent = CrimeInfoActivity.newIntent(getContext(), crime);
-                startActivity(intent);
-                //start crime info activity
+                startActivity(intent); //start crime info activity
             }
         });
         myAdapter.setCrimes(crimeList);
         recyclerView.setAdapter(myAdapter);
-        return v;
     }
 
     public interface OnClick {

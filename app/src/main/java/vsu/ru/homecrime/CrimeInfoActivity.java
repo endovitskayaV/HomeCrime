@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import vsu.ru.homecrime.model.Crime;
 
 
-
 public class CrimeInfoActivity extends FragmentActivity {
     public static final String CRIME_KEY = "vsu.ru.homecrime.crime";
 
@@ -22,11 +21,9 @@ public class CrimeInfoActivity extends FragmentActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.frame_layout);
         if (fragment == null) {
-            fragment = new CrimeInfoFragment();
-            Bundle bundle=new Bundle();
-            bundle.putSerializable(CRIME_KEY, getIntent().getSerializableExtra(CRIME_KEY));
-            fragment.setArguments(bundle);
-            fragmentManager.beginTransaction().add(R.id.frame_layout, fragment).commit();
+            fragmentManager.beginTransaction()
+                    .add(R.id.frame_layout,
+                    CrimeInfoFragment.newInstance((Crime) getIntent().getSerializableExtra(CRIME_KEY))).commit();
         }
     }
 
