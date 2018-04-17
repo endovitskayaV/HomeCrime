@@ -51,4 +51,20 @@ public class Crime implements Serializable{
     public boolean isSolved() {
         return isSolved;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setSolved(boolean solved) {
+        isSolved = solved;
+    }
 }

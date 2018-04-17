@@ -3,15 +3,11 @@ package vsu.ru.homecrime;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,8 +65,8 @@ public class AddCrimeFragment extends Fragment {
 //            }
 //        });
 
-        titleTextView = v.findViewById(R.id.title_text_view);
-        descriptionTextView = v.findViewById(R.id.description_text_view);
+        titleTextView = v.findViewById(R.id.title_edit_text);
+        descriptionTextView = v.findViewById(R.id.description_edit_text_);
 
         okButton = v.findViewById(R.id.ok_button);
         okButton.setOnClickListener(new View.OnClickListener() {

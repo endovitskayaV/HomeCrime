@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/crime_list_recycler_view"
+        android:paddingTop="8dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/crime_list_item">
     </android.support.v7.widget.RecyclerView>
 

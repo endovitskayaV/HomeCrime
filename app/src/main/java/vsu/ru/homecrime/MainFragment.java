@@ -19,6 +19,7 @@ public class MainFragment extends Fragment {
     private List<Crime> crimeList;
     private MyAdapter myAdapter;
     private RecyclerView recyclerView;
+    private Integer clickedElementPosition;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,28 +54,28 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (myAdapter == null) {
-            createAdapter();
-        } else {
+        crimeList = DataKeeper.getNewInstance().getCrimeList();
+        myAdapter.setCrimes(crimeList);
+        if (clickedElementPosition == null) {
             myAdapter.notifyDataSetChanged();
-           // TODO: use notifyItemChanger(int position)- элемент который просматривали только обновить
+        } else {
+            myAdapter.notifyItemChanged(clickedElementPosition);
         }
-
     }
 
     private void createAdapter() {
         myAdapter = new MyAdapter(new MainFragment.OnClick() {
             @Override
-            public void onClick(Crime crime, View view) {
-                Intent intent = CrimeInfoActivity.newIntent(getContext(), crime);
+            public void onClick(int position, View view) {
+                clickedElementPosition = position;
+                Intent intent = CrimeInfoActivity.newIntent(getContext(), myAdapter.getCrimes().get(position));
                 startActivity(intent); //start crime info activity
             }
         });
-        myAdapter.setCrimes(crimeList);
         recyclerView.setAdapter(myAdapter);
     }
 
     public interface OnClick {
-        void onClick(Crime crime, View view);
+        void onClick(int position, View view);
     }
 }

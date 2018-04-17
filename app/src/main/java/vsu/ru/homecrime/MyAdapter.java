@@ -19,11 +19,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
     private List<Crime> crimes = new ArrayList<>();
     private MainFragment.OnClick onClick;
 
-    public MyAdapter(MainFragment.OnClick onClick){
-        this.onClick=onClick;
+    public MyAdapter(MainFragment.OnClick onClick) {
+        this.onClick = onClick;
     }
+
     void setCrimes(List<Crime> crimes) {
         this.crimes = crimes;
+    }
+
+    List<Crime> getCrimes() {
+        return crimes;
     }
 
     @Override
@@ -57,12 +62,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
                 public void onClick(View v) {
                     //обработка нажатия на отдельные элементы списка
                     // go to item info -> activity+ fragment
-                    onClick.onClick(crimes.get(getAdapterPosition()), v);
+                    onClick.onClick(getAdapterPosition(), v);
 
                 }
             });
             titleTextView = itemView.findViewById(R.id.title);
-            dateTextView = itemView.findViewById(R.id.date_text_view);
+            dateTextView = itemView.findViewById(R.id.date_date_picker);
             isSolvedCheckBox = itemView.findViewById(R.id.is_solved_check_box);
         }
 

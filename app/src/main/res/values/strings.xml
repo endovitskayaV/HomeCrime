@@ -7,4 +7,5 @@
     <string name="unsolved">unsolved</string>
     <string name="added">added</string>
     <string name="empty_field">Empty field!</string>
+    <string name="toolbar_title">Home crime</string>
 </resources>

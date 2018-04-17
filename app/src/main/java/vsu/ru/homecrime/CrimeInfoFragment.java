@@ -7,10 +7,16 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import vsu.ru.homecrime.model.Crime;
@@ -34,30 +40,41 @@ public class CrimeInfoFragment extends Fragment {
         crime = (Crime) getArguments().get(CRIME_KEY);
 
 
-        TextView titleTextView = v.findViewById(R.id.title_text_view);
-        titleTextView.setText(crime.getTitle());
+        final EditText titleEditText = v.findViewById(R.id.title_edit_text);
+        titleEditText.setText(crime.getTitle());
 
-        TextView descriptionTextView = v.findViewById(R.id.description_text_view);
-        descriptionTextView.setText(crime.getDescription());
+        final EditText descriptionEditText = v.findViewById(R.id.description_edit_text_);
+        descriptionEditText.setText(crime.getDescription());
 
-        TextView dateTextView = v.findViewById(R.id.date_text_view);
-        DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-        dateTextView.setText(dateFormat.format(crime.getDate()));
+        final DatePicker datePicker = v.findViewById(R.id.date_date_picker);
 
-        TextView isSolvedTextView = v.findViewById(R.id.solved_text_view);
-        setIsSolved(isSolvedTextView);
+        //DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+        //  .setText(dateFormat.format(crime.getDate()));
+
+        datePicker.init(crime.getDate().getYear(), crime.getDate().getMonth(), crime.getDate().getDay(), null);
+        final CheckBox isSolvedCheckBox = v.findViewById(R.id.solved_check_box);
+        isSolvedCheckBox.setChecked(crime.isSolved());
+
+        Button okButton = v.findViewById(R.id.ok_button);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isTextValid(titleEditText.getText()) || !isTextValid(descriptionEditText.getText()))
+                    Toast.makeText(getActivity(), R.string.empty_field, Toast.LENGTH_SHORT).show();
+                else {
+                   crime.setTitle(titleEditText.getText().toString());
+                   crime.setDescription(descriptionEditText.getText().toString());
+                   crime.setDate(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
+                   crime.setSolved(isSolvedCheckBox.isChecked());
+                    Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
+                 //   crimes.add(crime);
+                    //return crime
+
+                }
+            }
+        });
 
         return v;
-    }
-
-    private void setIsSolved(TextView isSolvedTextView) {
-        if (crime.isSolved()) {
-            isSolvedTextView.setText(R.string.solved);
-            isSolvedTextView.setTextColor(ContextCompat.getColor(this.getContext(), R.color.green));
-        } else {
-            isSolvedTextView.setText(R.string.unsolved);
-            isSolvedTextView.setTextColor(ContextCompat.getColor(this.getContext(), R.color.red));
-        }
     }
 
     public static CrimeInfoFragment newInstance(Crime crime) {
@@ -68,5 +85,7 @@ public class CrimeInfoFragment extends Fragment {
         return fragment;
     }
 
-
+    private boolean isTextValid(CharSequence text) {
+        return text != null;
+    }
 }
