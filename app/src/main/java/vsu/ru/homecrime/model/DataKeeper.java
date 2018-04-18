@@ -50,4 +50,9 @@ public class DataKeeper {
     public List<Crime> getCrimeList() {
         return crimesList;
     }
+
+    public List<Crime> editCrime(int index, Crime crime){
+        crimesList.set(index, crime);
+        return crimesList;
+    }
 }

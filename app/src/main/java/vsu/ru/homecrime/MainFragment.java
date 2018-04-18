@@ -15,11 +15,25 @@ import java.util.List;
 import vsu.ru.homecrime.model.Crime;
 import vsu.ru.homecrime.model.DataKeeper;
 
+import static vsu.ru.homecrime.CrimeInfoActivity.CRIME_KEY;
+
 public class MainFragment extends Fragment {
+
+    private final int REQUEST_CODE = 972;
+
     private List<Crime> crimeList;
     private MyAdapter myAdapter;
     private RecyclerView recyclerView;
     private Integer clickedElementPosition;
+    private Crime changedCrime;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == REQUEST_CODE && intent != null)
+            changedCrime = (Crime) intent.getSerializableExtra(CRIME_KEY);
+        //  questions.get(questionCounter).setCheated(intent.getBooleanExtra(EXTRA_HAS_TAPPED, false));
+
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,11 +68,14 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        crimeList = DataKeeper.getNewInstance().getCrimeList();
-        myAdapter.setCrimes(crimeList);
+
         if (clickedElementPosition == null) {
+            crimeList = DataKeeper.getNewInstance().getCrimeList();
+            myAdapter.setCrimes(crimeList);
             myAdapter.notifyDataSetChanged();
         } else {
+            crimeList = DataKeeper.getNewInstance().editCrime(clickedElementPosition, changedCrime);
+            myAdapter.setCrimes(crimeList);
             myAdapter.notifyItemChanged(clickedElementPosition);
         }
     }
@@ -69,7 +86,9 @@ public class MainFragment extends Fragment {
             public void onClick(int position, View view) {
                 clickedElementPosition = position;
                 Intent intent = CrimeInfoActivity.newIntent(getContext(), myAdapter.getCrimes().get(position));
-                startActivity(intent); //start crime info activity
+
+                startActivityForResult(intent, REQUEST_CODE);
+                // startActivity(intent); //start crime info activity
             }
         });
         recyclerView.setAdapter(myAdapter);

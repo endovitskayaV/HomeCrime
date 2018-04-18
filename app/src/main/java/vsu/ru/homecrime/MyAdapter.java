@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -53,7 +54,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
 
         private TextView titleTextView;
         private TextView dateTextView;
-        private CheckBox isSolvedCheckBox;
+        private ImageView isSolvedImageView;
+        //  private CheckBox isSolvedCheckBox;
 
         CrimeElementViewHolder(final View itemView) {
             super(itemView);
@@ -68,15 +70,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
             });
             titleTextView = itemView.findViewById(R.id.title);
             dateTextView = itemView.findViewById(R.id.date_date_picker);
-            isSolvedCheckBox = itemView.findViewById(R.id.is_solved_check_box);
+            isSolvedImageView = itemView.findViewById(R.id.is_solved_image_view);
         }
 
         void bindTo(Crime crime) {
             DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
             titleTextView.setText(crime.getTitle());
             dateTextView.setText(dateFormat.format(crime.getDate()));
-            isSolvedCheckBox.setChecked(crime.isSolved());
-            isSolvedCheckBox.setEnabled(false);
+            if (crime.isSolved()) {
+                isSolvedImageView.setImageResource(R.drawable.ic_solved);
+            } else {
+                isSolvedImageView.setImageResource(R.drawable.ic_not_solved);
+            }
         }
     }
 
