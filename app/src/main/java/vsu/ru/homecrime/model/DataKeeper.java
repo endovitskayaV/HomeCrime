@@ -1,5 +1,8 @@
 package vsu.ru.homecrime.model;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -53,6 +56,15 @@ public class DataKeeper {
 
     public List<Crime> editCrime(int index, Crime crime){
         crimesList.set(index, crime);
+        return crimesList;
+    }
+
+
+    public List<Crime> editCrime(final Crime crime){
+     //  crimesList.stream().filter(x->crime.getId()==x.getId()).findFirst().orElse(null).
+     //  setTitle(crime.getTitle()).setDescription(crime.getDescription()).setSolved(crime.isSolved()).setDate(crime.getDate());
+      //  crimesList.set(index, crime);;
+        crimesList.add(crime);
         return crimesList;
     }
 }

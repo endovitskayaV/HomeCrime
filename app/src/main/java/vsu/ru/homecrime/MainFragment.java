@@ -22,6 +22,7 @@ public class MainFragment extends Fragment {
     private final int REQUEST_CODE = 972;
 
     private List<Crime> crimeList;
+
     private MyAdapter myAdapter;
     private RecyclerView recyclerView;
     private Integer clickedElementPosition;
@@ -72,12 +73,13 @@ public class MainFragment extends Fragment {
         if (clickedElementPosition == null) {
             crimeList = DataKeeper.getNewInstance().getCrimeList();
             myAdapter.setCrimes(crimeList);
-            myAdapter.notifyDataSetChanged();
-        } else {
-            crimeList = DataKeeper.getNewInstance().editCrime(clickedElementPosition, changedCrime);
-            myAdapter.setCrimes(crimeList);
-            myAdapter.notifyItemChanged(clickedElementPosition);
+           //!!! myAdapter.notifyDataSetChanged();
         }
+//        } else {
+//            crimeList = DataKeeper.getNewInstance().editCrime(clickedElementPosition, changedCrime);
+//            myAdapter.setCrimes(crimeList);
+//            myAdapter.notifyItemChanged(clickedElementPosition);
+//        }
     }
 
     private void createAdapter() {
@@ -87,8 +89,8 @@ public class MainFragment extends Fragment {
                 clickedElementPosition = position;
                 Intent intent = CrimeInfoActivity.newIntent(getContext(), myAdapter.getCrimes().get(position));
 
-                startActivityForResult(intent, REQUEST_CODE);
-                // startActivity(intent); //start crime info activity
+              //  startActivityForResult(intent, REQUEST_CODE);
+                 startActivity(intent); //start crime info activity
             }
         });
         recyclerView.setAdapter(myAdapter);

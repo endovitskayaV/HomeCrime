@@ -52,19 +52,23 @@ public class Crime implements Serializable{
         return isSolved;
     }
 
-    public void setTitle(String title) {
+    public Crime setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    public void setDescription(String description) {
+    public Crime setDescription(String description) {
         this.description = description;
+        return this;
     }
 
-    public void setDate(Date date) {
+    public Crime setDate(Date date) {
         this.date = date;
+        return this;
     }
 
-    public void setSolved(boolean solved) {
+    public Crime setSolved(boolean solved) {
         isSolved = solved;
+        return this;
     }
 }

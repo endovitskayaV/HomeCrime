@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import vsu.ru.homecrime.model.Crime;
+import vsu.ru.homecrime.model.DataKeeper;
 
 import static vsu.ru.homecrime.CrimeInfoActivity.CRIME_KEY;
 
@@ -40,8 +43,25 @@ public class CrimeInfoFragment extends Fragment {
         crime = (Crime) getArguments().get(CRIME_KEY);
 
 
-        final EditText titleEditText = v.findViewById(R.id.title_edit_text);
+         EditText titleEditText = v.findViewById(R.id.title_edit_text);
         titleEditText.setText(crime.getTitle());
+        titleEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                crime.setTitle(s.toString());
+                DataKeeper.getNewInstance().editCrime(crime);
+            }
+        });
 
         final EditText descriptionEditText = v.findViewById(R.id.description_edit_text_);
         descriptionEditText.setText(crime.getDescription());
@@ -67,6 +87,8 @@ public class CrimeInfoFragment extends Fragment {
                    crime.setDate(new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth()));
                    crime.setSolved(isSolvedCheckBox.isChecked());
                     Toast.makeText(v.getContext(), R.string.added, Toast.LENGTH_SHORT).show();
+                    DataKeeper.getNewInstance().editCrime(crime);
+                    getActivity().onBackPressed();
                  //   crimes.add(crime);
                     //return crime
 
@@ -77,9 +99,9 @@ public class CrimeInfoFragment extends Fragment {
         return v;
     }
 
-    public static CrimeInfoFragment newInstance(Crime crime) {
+    public static CrimeInfoFragment newInstance(int position) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(CRIME_KEY, crime);
+        bundle.putSerializable(CRIME_KEY, DataKeeper.getNewInstance().getCrimeList().get(position));
         CrimeInfoFragment fragment = new CrimeInfoFragment();
         fragment.setArguments(bundle); // после создания, перед add!!!!!
         return fragment;
