@@ -15,37 +15,11 @@ public class DataKeeper {
     }
 
     public static DataKeeper getNewInstance() {
-        if (newInstance != null) return newInstance;
-        else {
-            crimesList = new ArrayList<>();
-            crimesList.add(new Crime("Murder1", "Description1",
-                    new GregorianCalendar(2014, Calendar.MARCH, 1).getTime(), true));
-            crimesList.add(new Crime("Murder2", "Description2",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 2).getTime()));
-            crimesList.add(new Crime("Murder3", "Description3",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 3).getTime(), true));
-            crimesList.add(new Crime("Murder4", "Description4",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 4).getTime()));
-            crimesList.add(new Crime("Murder5", "Description5",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 5).getTime(), true));
-            crimesList.add(new Crime("Murder6", "Description6",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 6).getTime()));
-            crimesList.add(new Crime("Murder7", "Description7",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 7).getTime(), true));
-            crimesList.add(new Crime("Murder8", "Description8",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 8).getTime(), true));
-            crimesList.add(new Crime("Murder9", "Description9",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 9).getTime()));
-            crimesList.add(new Crime("Murder10", "Description10",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 10).getTime()));
-            crimesList.add(new Crime("Murder11", "Description11",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime()));
-            crimesList.add(new Crime("Murder12", "Description12",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 12).getTime()));
-            crimesList.add(new Crime("Murder13", "Description13",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 13).getTime(), true));
-
+        if (newInstance != null) {
+            return newInstance;
+        } else {
             newInstance = new DataKeeper();
+            newInstance.setInitalData();
             return newInstance;
         }
     }
@@ -66,5 +40,35 @@ public class DataKeeper {
     public Crime getById(int id) {
         return Stream.of(crimesList)
                 .filter(crime -> crime.getId() == id).findFirst().orElse(null);
+    }
+
+    private void setInitalData() {
+        crimesList = new ArrayList<>();
+        crimesList.add(new Crime("Murder1", "Description1",
+                new GregorianCalendar(2014, Calendar.MARCH, 1).getTime(), true));
+        crimesList.add(new Crime("Murder2", "Description2",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 2).getTime()));
+        crimesList.add(new Crime("Murder3", "Description3",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 3).getTime(), true));
+        crimesList.add(new Crime("Murder4", "Description4",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 4).getTime()));
+        crimesList.add(new Crime("Murder5", "Description5",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 5).getTime(), true));
+        crimesList.add(new Crime("Murder6", "Description6",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 6).getTime()));
+        crimesList.add(new Crime("Murder7", "Description7",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 7).getTime(), true));
+        crimesList.add(new Crime("Murder8", "Description8",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 8).getTime(), true));
+        crimesList.add(new Crime("Murder9", "Description9",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 9).getTime()));
+        crimesList.add(new Crime("Murder10", "Description10",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 10).getTime()));
+        crimesList.add(new Crime("Murder11", "Description11",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime()));
+        crimesList.add(new Crime("Murder12", "Description12",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 12).getTime()));
+        crimesList.add(new Crime("Murder13", "Description13",
+                new GregorianCalendar(2014, Calendar.FEBRUARY, 13).getTime(), true));
     }
 }

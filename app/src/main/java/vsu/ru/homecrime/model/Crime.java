@@ -28,10 +28,6 @@ public class Crime implements Serializable{
         this.isSolved = isSolved;
     }
 
-    private int generateId() {
-        return counter++;
-    }
-
     public int getId() {
         return id;
     }
@@ -70,5 +66,9 @@ public class Crime implements Serializable{
     public Crime setSolved(boolean solved) {
         isSolved = solved;
         return this;
+    }
+
+    private int generateId() {
+        return counter++;
     }
 }

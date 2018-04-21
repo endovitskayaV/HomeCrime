@@ -60,12 +60,8 @@ public class CrimeInfoFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().isEmpty()) {
-                    crime.setTitle(s.toString());
-                    dataKeeper.editCrime(crime);
-                } else {
-                    Toast.makeText(v.getContext(), R.string.empty_title, Toast.LENGTH_SHORT).show();
-                }
+                crime.setTitle(s.toString());
+                dataKeeper.editCrime(crime);
             }
         });
 
