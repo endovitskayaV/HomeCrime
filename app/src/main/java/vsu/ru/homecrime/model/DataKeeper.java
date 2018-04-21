@@ -1,7 +1,6 @@
 package vsu.ru.homecrime.model;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import com.annimon.stream.Stream;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +19,7 @@ public class DataKeeper {
         else {
             crimesList = new ArrayList<>();
             crimesList.add(new Crime("Murder1", "Description1",
-                    new GregorianCalendar(2014, Calendar.FEBRUARY, 1).getTime(), true));
+                    new GregorianCalendar(2014, Calendar.MARCH, 1).getTime(), true));
             crimesList.add(new Crime("Murder2", "Description2",
                     new GregorianCalendar(2014, Calendar.FEBRUARY, 2).getTime()));
             crimesList.add(new Crime("Murder3", "Description3",
@@ -45,6 +44,7 @@ public class DataKeeper {
                     new GregorianCalendar(2014, Calendar.FEBRUARY, 12).getTime()));
             crimesList.add(new Crime("Murder13", "Description13",
                     new GregorianCalendar(2014, Calendar.FEBRUARY, 13).getTime(), true));
+
             newInstance = new DataKeeper();
             return newInstance;
         }
@@ -54,17 +54,17 @@ public class DataKeeper {
         return crimesList;
     }
 
-    public List<Crime> editCrime(int index, Crime crime){
-        crimesList.set(index, crime);
-        return crimesList;
+    public void editCrime(final Crime crime) {
+        Stream.of(crimesList)
+                .filter(x -> crime.getId() == x.getId()).findFirst().orElse(null).
+                setTitle(crime.getTitle())
+                .setDescription(crime.getDescription())
+                .setSolved(crime.isSolved())
+                .setDate(crime.getDate());
     }
 
-
-    public List<Crime> editCrime(final Crime crime){
-     //  crimesList.stream().filter(x->crime.getId()==x.getId()).findFirst().orElse(null).
-     //  setTitle(crime.getTitle()).setDescription(crime.getDescription()).setSolved(crime.isSolved()).setDate(crime.getDate());
-      //  crimesList.set(index, crime);;
-        crimesList.add(crime);
-        return crimesList;
+    public Crime getById(int id) {
+        return Stream.of(crimesList)
+                .filter(crime -> crime.getId() == id).findFirst().orElse(null);
     }
 }

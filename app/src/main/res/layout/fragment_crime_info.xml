@@ -12,14 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:id="@+id/title_edit_text"
-        android:hint="@string/title"/>
+        android:hint="@string/title"
+        android:textSize="20sp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:id="@+id/description_edit_text_"
-        android:hint="@string/description"/>
+        android:hint="@string/description"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_text_view"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,20 +47,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/solved_check_box"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/ok_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/ok" />
-
-
-
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/date_date_picker"/>
 
 
 </LinearLayout>

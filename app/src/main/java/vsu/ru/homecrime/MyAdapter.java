@@ -18,9 +18,9 @@ import vsu.ru.homecrime.model.Crime;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHolder> {
     private List<Crime> crimes = new ArrayList<>();
-    private MainFragment.OnClick onClick;
+    private OnClick onClick;
 
-    public MyAdapter(MainFragment.OnClick onClick) {
+    public MyAdapter(OnClick onClick) {
         this.onClick = onClick;
     }
 
@@ -69,7 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
                 }
             });
             titleTextView = itemView.findViewById(R.id.title);
-            dateTextView = itemView.findViewById(R.id.date_date_picker);
+            dateTextView = itemView.findViewById(R.id.date_text_view);
             isSolvedImageView = itemView.findViewById(R.id.is_solved_image_view);
         }
 
@@ -85,4 +85,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CrimeElementViewHo
         }
     }
 
+
+
+    public interface OnClick {
+        void onClick(int position, View view);
+    }
 }
